@@ -3,7 +3,7 @@ name: Build Flutter Web
 on:
   push:
     branches:
-      - main # or your branch name
+      - main
   pull_request:
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
       - name: Setup Flutter (beta channel)
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.7.0-209.1.beta' # Your required version
+          flutter-version: '3.7.0-209.1.beta'
           channel: 'beta'
 
       - name: Install dependencies
@@ -27,7 +27,7 @@ jobs:
         run: flutter build web
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: flutter-web-build
           path: build/web
