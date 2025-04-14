@@ -6,7 +6,7 @@ class MainMenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Dice Duels')),
+      appBar: AppBar(title: Text('Dice Duels game')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
