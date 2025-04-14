@@ -1,33 +1,38 @@
-name: Build Flutter Web
+name: Build Flutter Web & Deploy to Netlify
 
 on:
   push:
     branches:
-      - main
-  pull_request:
+      - main  # or your default branch
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Setup Flutter (beta channel)
+      - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.7.0-209.1.beta'
-          channel: 'beta'
+          flutter-version: '3.19.3'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: flutter pub get
 
-      - name: Build Flutter web
+      - name: Build Web
         run: flutter build web
 
-      - name: Upload build artifacts
+      - name: Upload Build Artifacts
         uses: actions/upload-artifact@v3.1.3
         with:
           name: flutter-web-build
           path: build/web
+
+      - name: Deploy to Deploy Branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/web
+          publish_branch: deploy
